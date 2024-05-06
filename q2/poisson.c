@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include <stdlib.h>  // strtol()
+#include <stdlib.h>  // strtold()
 #include <math.h>   // pow()
 
-long factorial(int n);
+long double factorial(long double n);
 long double poisson (long double lambda, long double k);
 
 int main(int argc, char* argv[]){
@@ -11,18 +11,18 @@ int main(int argc, char* argv[]){
         return 1;
     }
 
-    long double lambda = strtol(argv[1], NULL, 10),
-        k = strtol(argv[2], NULL, 10);
+    long double lambda = strtold(argv[1], NULL),
+        k = strtold(argv[2], NULL);
 
     printf("%Lf\n", poisson(lambda, k));
     return 0;    
 }
 
 long double poisson (long double lambda, long double k){
-    return (pow(lambda, k)/factorial(k)) * expf(-(int)lambda);
+    return ((long double)(pow(lambda, k))/factorial(k)) * (long double)(expf(-lambda));
 }
 
-long factorial(int n){
+long double factorial(long double n){
     if (n == 0 || n == 1)
         return 1;
     return factorial(n-1) * n;    
