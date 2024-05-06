@@ -20,7 +20,7 @@ Poisson: $(MAIN_OBJECT) $(LIB_POISSON_D)
 
 # Create libraries
 $(LIB_POISSON_D): libpoisson.o
-	$(CC) -shared $^ $(FLAGS) -o $@
+	$(CC) $(FLAGS) -shared $^ -o $@
 
 clean:
 	rm -f *.o *.h.ghc Poisson *.so
