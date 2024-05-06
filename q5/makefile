@@ -11,4 +11,4 @@ max_sub_array_sum: max_sub_array_sum.o
 	$(CC) $(FLAGS) -c $^
 
 clean:
-	rm -f *.o *.h.ghc max_sub_array_sum
+	rm -f *.o *.h.ghc max_sub_array_sum *.out
