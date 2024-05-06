@@ -6,9 +6,9 @@
 // representation of the graph
 
 #include <limits.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "dijkstra.h"
 
 // Number of vertices in the graph
 // #define V 9
@@ -16,7 +16,7 @@
 // A utility function to find the vertex with minimum
 // distance value, from the set of vertices not yet included
 // in shortest path tree
-int minDistance(int dist[], bool sptSet[])
+int minDistance(int dist[], bool sptSet[], int V)
 {
 	// Initialize min value
 	int min = INT_MAX, min_index;
@@ -30,7 +30,7 @@ int minDistance(int dist[], bool sptSet[])
 
 // A utility function to print the constructed distance
 // array
-void printSolution(int dist[])
+void printSolution(int dist[], int V)
 {
 	printf("Vertex \t\t Distance from Source\n");
 	for (int i = 0; i < V; i++)
@@ -40,7 +40,7 @@ void printSolution(int dist[])
 // Function that implements Dijkstra's single source
 // shortest path algorithm for a graph represented using
 // adjacency matrix representation
-void dijkstra(int graph[V][V], int src)
+void dijkstra(int **graph, int src, int V)
 {
 	int dist[V]; // The output array. dist[i] will hold the
 				// shortest
@@ -64,7 +64,7 @@ void dijkstra(int graph[V][V], int src)
 		// Pick the minimum distance vertex from the set of
 		// vertices not yet processed. u is always equal to
 		// src in the first iteration.
-		int u = minDistance(dist, sptSet);
+		int u = minDistance(dist, sptSet, V);
 
 		// Mark the picked vertex as processed
 		sptSet[u] = true;
@@ -84,27 +84,59 @@ void dijkstra(int graph[V][V], int src)
 	}
 
 	// print the constructed distance array
-	printSolution(dist);
+	printSolution(dist, V);
 }
 
+#ifndef TEST
 int main()
 {
 	/* Let us create the example graph discussed above */
-	int **graph;
 	int V = 0;		// Number of verties in the graph
-	int i = 0;	// counter for row filling
+	char c;
+	int num;
 
-	while (1){
-		// Allocate starting size for current row
-		int *row = (int *) malloc ((V + 1) * sizeof (int));
+	printf("How many vertices do you want?\n");
+	scanf("%d", &V);
 
-		while (1) {
-			if ()
+	int** graph = (int **) malloc (V * sizeof(int*));
+
+	if ((c = getchar()) != '\n'){
+		fprintf(stderr, "ERROR: Invalid input! a line-break was expected, received %c.\n", c);
+		exit(EXIT_FAILURE);
+	}
+
+	for (int i = 0; i < V; i++){
+		graph[i] = (int *)malloc(V * sizeof(int));
+		for (int j = 0; j < V; j++){
+			// skip 1 space or print error if less or more than 1 space was given (only done after the first input in the line)
+			if (j != 0 && (c = getchar()) != ' ') {
+				fprintf(stderr, "ERROR: Invalid input! a space was expected, received '%c'\n", c);
+				exit(EXIT_FAILURE);
+			}
+
+			if (scanf("%d", &num) == 1) {
+				if (num >= 0){
+					graph[i][j] = num;
+				}
+				else {
+					fprintf(stderr, "ERROR: Negative weights are not allowed!\n");
+					exit(EXIT_FAILURE);
+				}
+			}
+			else {
+				fprintf(stderr, "ERROR: Invalid input! Please enter integers only!\n");
+				exit(EXIT_FAILURE);
+			}
+		}
+		if ((c = getchar()) != '\n'){
+			fprintf(stderr, "ERROR: Invalid input! a line-break was expected, received '%c'\nDon't add a space at the end of the row.", c);
+			exit(EXIT_FAILURE);
 		}
 	}
 
 	// Function call
-	dijkstra(graph, 0);
+	dijkstra(graph, 0, V);
 
 	return 0;
 }
+#endif
