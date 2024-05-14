@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/sam/Desktop/git/Operating-Systems/Operating-Systems-Ex1/q6",
+            "binaryPath": "/home/sam/Desktop/git/Operating-Systems/Operating-Systems-Ex1/q6/findPhone",
+            "binaryArgs": ["Nir", "Biton"]
+        }
+    ]
+}
