@@ -1,0 +1,146 @@
+        -:    0:Source:dijkstra.c
+        -:    0:Graph:dijkstra.gcno
+        -:    0:Data:dijkstra.gcda
+        -:    0:Runs:7
+        -:    1:// Following the assignment's guideline: the main func was written by me, everything else, taken from Geeks4Geeks:
+        -:    2:// https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
+        -:    3:
+        -:    4:// C program for Dijkstra's single source shortest path
+        -:    5:// algorithm. The program is for adjacency matrix
+        -:    6:// representation of the graph
+        -:    7:
+        -:    8:#include <limits.h>
+        -:    9:#include <stdio.h>
+        -:   10:#include <stdlib.h>
+        -:   11:#include "dijkstra.h"
+        -:   12:
+        -:   13:// Number of vertices in the graph
+        -:   14:// #define V 9
+        -:   15:
+        -:   16:// A utility function to find the vertex with minimum
+        -:   17:// distance value, from the set of vertices not yet included
+        -:   18:// in shortest path tree
+        2:   19:int minDistance(int dist[], bool sptSet[], int V)
+        -:   20:{
+        -:   21:	// Initialize min value
+        2:   22:	int min = INT_MAX, min_index;
+        -:   23:
+        8:   24:	for (int v = 0; v < V; v++)
+        6:   25:		if (sptSet[v] == false && dist[v] <= min)
+        2:   26:			min = dist[v], min_index = v;
+        -:   27:
+        2:   28:	return min_index;
+        -:   29:}
+        -:   30:
+        -:   31:// A utility function to print the constructed distance
+        -:   32:// array
+        1:   33:void printSolution(int dist[], int V)
+        -:   34:{
+        1:   35:	printf("Vertex \t\t Distance from Source\n");
+        4:   36:	for (int i = 0; i < V; i++)
+        3:   37:		printf("%d \t\t\t\t %d\n", i, dist[i]);
+        1:   38:}
+        -:   39:
+        -:   40:// Function that implements Dijkstra's single source
+        -:   41:// shortest path algorithm for a graph represented using
+        -:   42:// adjacency matrix representation
+        1:   43:void dijkstra(int **graph, int src, int V)
+        1:   44:{
+        1:   45:	int dist[V]; // The output array. dist[i] will hold the
+        -:   46:				// shortest
+        -:   47:	// distance from src to i
+        -:   48:
+        1:   49:	bool sptSet[V]; // sptSet[i] will be true if vertex i is
+        -:   50:					// included in shortest
+        -:   51:	// path tree or shortest distance from src to i is
+        -:   52:	// finalized
+        -:   53:
+        -:   54:	// Initialize all distances as INFINITE and stpSet[] as
+        -:   55:	// false
+        4:   56:	for (int i = 0; i < V; i++)
+        3:   57:		dist[i] = INT_MAX, sptSet[i] = false;
+        -:   58:
+        -:   59:	// Distance of source vertex from itself is always 0
+        1:   60:	dist[src] = 0;
+        -:   61:
+        -:   62:	// Find shortest path for all vertices
+        3:   63:	for (int count = 0; count < V - 1; count++) {
+        -:   64:		// Pick the minimum distance vertex from the set of
+        -:   65:		// vertices not yet processed. u is always equal to
+        -:   66:		// src in the first iteration.
+        2:   67:		int u = minDistance(dist, sptSet, V);
+        -:   68:
+        -:   69:		// Mark the picked vertex as processed
+        2:   70:		sptSet[u] = true;
+        -:   71:
+        -:   72:		// Update dist value of the adjacent vertices of the
+        -:   73:		// picked vertex.
+        8:   74:		for (int v = 0; v < V; v++)
+        -:   75:
+        -:   76:			// Update dist[v] only if is not in sptSet,
+        -:   77:			// there is an edge from u to v, and total
+        -:   78:			// weight of path from src to v through u is
+        -:   79:			// smaller than current value of dist[v]
+        6:   80:			if (!sptSet[v] && graph[u][v]
+        3:   81:				&& dist[u] != INT_MAX
+        3:   82:				&& dist[u] + graph[u][v] < dist[v])
+        2:   83:				dist[v] = dist[u] + graph[u][v];
+        -:   84:	}
+        -:   85:
+        -:   86:	// print the constructed distance array
+        1:   87:	printSolution(dist, V);
+        1:   88:}
+        -:   89:
+        -:   90:#ifndef TEST
+        7:   91:int main()
+        -:   92:{
+        -:   93:	/* Let us create the example graph discussed above */
+        7:   94:	int V = 0;		// Number of verties in the graph
+        -:   95:	char c;
+        -:   96:	int num;
+        -:   97:
+        7:   98:	printf("How many vertices do you want?\n");
+        7:   99:	scanf("%d", &V);
+        -:  100:
+        7:  101:	int** graph = (int **) malloc (V * sizeof(int*));
+        -:  102:
+        7:  103:	if ((c = getchar()) != '\n'){
+        1:  104:		fprintf(stderr, "ERROR: Invalid input! a line-break was expected, received %c.\n", c);
+        1:  105:		exit(EXIT_FAILURE);
+        -:  106:	}
+        -:  107:
+        9:  108:	for (int i = 0; i < V; i++){
+        8:  109:		graph[i] = (int *)malloc(V * sizeof(int));
+       29:  110:		for (int j = 0; j < V; j++){
+        -:  111:			// skip 1 space or print error if less or more than 1 space was given (only done after the first input in the line)
+       25:  112:			if (j != 0 && (c = getchar()) != ' ') {
+        2:  113:				fprintf(stderr, "ERROR: Invalid input! a space was expected, received '%c'\n", c);
+        2:  114:				exit(EXIT_FAILURE);
+        -:  115:			}
+        -:  116:
+       23:  117:			if (scanf("%d", &num) == 1) {
+       22:  118:				if (num >= 0){
+       21:  119:					graph[i][j] = num;
+        -:  120:				}
+        -:  121:				else {
+        1:  122:					fprintf(stderr, "ERROR: Negative weights are not allowed!\n");
+        1:  123:					exit(EXIT_FAILURE);
+        -:  124:				}
+        -:  125:			}
+        -:  126:			else {
+        1:  127:				fprintf(stderr, "ERROR: Invalid input! Please enter integers only!\n");
+        1:  128:				exit(EXIT_FAILURE);
+        -:  129:			}
+        -:  130:		}
+        4:  131:		if ((c = getchar()) != '\n'){
+        1:  132:			fprintf(stderr, "ERROR: Invalid input! a line-break was expected, received '%c'\nDon't add a space at the end of the row.", c);
+        1:  133:			exit(EXIT_FAILURE);
+        -:  134:		}
+        -:  135:	}
+        -:  136:
+        -:  137:	// Function call
+        1:  138:	dijkstra(graph, 0, V);
+        -:  139:
+        1:  140:	return 0;
+        -:  141:}
+        -:  142:#endif
