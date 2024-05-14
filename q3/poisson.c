@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>  // strtol()
 #include "libpoisson.h"
 
 int main(int argc, char* argv[]){
