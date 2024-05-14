@@ -6,7 +6,6 @@
 #define MAX_NUM 74
 #define MIN_NUM -25
 
-void generate_random_data (int* arr, int size);
 long max_sub_array_sum_n (int* arr, int size);      // n
 long max_sub_array_sum_n2 (int* arr, int size);     // n^2
 long max_sub_array_sum_n3 (int* arr, int size);     // n^3
@@ -24,16 +23,12 @@ int main (int argc, char* argv[]){
 
     int arr[size];
 
+    for (int i = 0; i < size; i++){
+        arr[i] = rand() % (MAX_NUM + 1 - MIN_NUM) + MIN_NUM;        // set cell to a random value in the range (MIN_NUM, MAX_NUM)
+    }
+
     clock_t start, end;
     double cpu_time_used;
-
-    // Generate random data
-    printf("Generating %d random values:\n", size);
-    start = clock();    // start the clock
-    generate_random_data(arr, size);
-    end = clock();      // end the clock
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;      // calculate in seconds
-    printf("Time taken to generate random data: %f seconds\n", cpu_time_used);
 
     // O(n)
     printf("Running O(n):\n");
@@ -61,14 +56,6 @@ int main (int argc, char* argv[]){
 
     return 0;
 }
-
-// Generating random data
-void generate_random_data (int* arr, int size){
-    for (int i = 0; i < size; i++){
-        arr[i] = rand() % (MAX_NUM + 1 - MIN_NUM) + MIN_NUM;        // set cell to a random value in the range (MIN_NUM, MAX_NUM)
-    }
-}
-
 
 // Using Kadane’s Algorithm
 // O(n)
