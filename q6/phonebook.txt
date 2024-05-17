@@ -1,28 +1,28 @@
-Nezer Zaidenberg,054-5531415\n
-Shani Ben Meir,054-3146629\n
-Noya Shalom,054-2109862\n
-Omri Cohen,054-1869245\n
-Maya Levi,054-8783920\n
-Yair Avraham,054-5023718\n
-Ella Amar,054-9508136\n
-Ron Ben David,054-6179354\n
-Maayan Goldstein,054-1195723\n
-Tal Bachar,054-8019463\n
-Adam Biton,054-2451863\n
-Ayelet Ovadia,054-1795083\n
-Noam Yosef,054-6739185\n
-Yael Friedman,054-7823059\n
-Eitan Cohen,054-6412085\n
-Roni Levi,054-3749602\n
-Barak Mizrahi,054-5906172\n
-Shira Levi,054-8563017\n
-Nadav Amar,054-2309865\n
-Avigail Cohen,054-8916237\n
-Ido Ben Shimon,054-4058912\n
-Tamar Avraham,054-7269138\n
-Hadar Mizrahi,054-5183072\n
-Maor Shalom,054-3692840\n
-Or Shabtay,054-7940532\n
-Roni Ovadia,054-2875019\n
-Yamit Cohen,054-6150824\n
-Nir Biton,054-9362074\n
+Nezer Zaidenberg,054-5531415
+Shani Ben Meir,054-3146629
+Noya Shalom,054-2109862
+Omri Cohen,054-1869245
+Maya Levi,054-8783920
+Yair Avraham,054-5023718
+Ella Amar,054-9508136
+Ron Ben David,054-6179354
+Maayan Goldstein,054-1195723
+Tal Bachar,054-8019463
+Adam Biton,054-2451863
+Ayelet Ovadia,054-1795083
+Noam Yosef,054-6739185
+Yael Friedman,054-7823059
+Eitan Cohen,054-6412085
+Roni Levi,054-3749602
+Barak Mizrahi,054-5906172
+Shira Levi,054-8563017
+Nadav Amar,054-2309865
+Avigail Cohen,054-8916237
+Ido Ben Shimon,054-4058912
+Tamar Avraham,054-7269138
+Hadar Mizrahi,054-5183072
+Maor Shalom,054-3692840
+Or Shabtay,054-7940532
+Roni Ovadia,054-2875019
+Yamit Cohen,054-6150824
+Nir Biton,054-9362074

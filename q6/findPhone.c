@@ -73,13 +73,12 @@ int main (int argc, char* argv[]){
         }
 
         // grep command to find the the number in the phonebook
-        // for (int i = 1; i < argc; i++){
-            if (execlp("grep", "grep", full_name, FILENAME, NULL) == -1){
-                perror("execlp");
-                // close pipe completely
-                close(pipefd[1]);
-                exit(EXIT_FAILURE);
-            // }
+        // -i makes grep case insensitive
+        if (execlp("grep", "grep", "-i", full_name, FILENAME, NULL) == -1){
+            perror("execlp");
+            // close pipe completely
+            close(pipefd[1]);
+            exit(EXIT_FAILURE);
         }
 
         // close pipe completely
